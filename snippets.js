@@ -1069,4 +1069,3 @@ circle(width / 2, height / 2, size);`,
     tip: 'Swap circle size for anything: colour, speed, rotation, the number of shapes in a grid.',
   },
 ];
-
