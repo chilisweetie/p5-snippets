@@ -6,299 +6,295 @@
 <title>p5.js Snippets</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #f6f5f1;
-    --surface: #ffffff;
-    --code-bg: #1b1b1f;
-    --code-fg: #e8e6e1;
-    --text: #1b1b1f;
-    --muted: #6a6862;
-    --line: #e2dfd7;
-    --accent: #1b1b1f;
-    --flash: #fff3b0;
+    --bg: #ffffff;
+    --text: #0a0a0a;
+    --muted: #737373;
+    --faint: #a3a3a3;
+    --line: #ebebeb;
+    --hover: #f5f5f5;
+    --code-bg: #f7f7f7;
+    --code-fg: #171717;
+    --flash: #fff8c5;
 
-    /* where-to-paste colours */
-    --p-html: #6b7280;
+    --p-html: #737373;
     --p-top: #7c3aed;
-    --p-preload: #0f766e;
+    --p-preload: #0d9488;
     --p-setup: #2563eb;
-    --p-draw: #dc4c12;
-    --p-keyPressed: #15803d;
-    --p-mousePressed: #c0267a;
-    --p-end: #a16207;
+    --p-draw: #ea580c;
+    --p-keyPressed: #16a34a;
+    --p-mousePressed: #db2777;
+    --p-end: #ca8a04;
 
-    /* code colours */
-    --c-com: #8a8a93;
-    --c-str: #9fd88b;
-    --c-num: #f5b971;
-    --c-key: #c9a7ff;
-    --c-fn: #7cc7ff;
+    --c-com: #a3a3a3;
+    --c-str: #15803d;
+    --c-num: #c2410c;
+    --c-key: #7c3aed;
+    --c-fn: #2563eb;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #141416;
-      --surface: #1d1d21;
-      --code-bg: #0e0e10;
-      --text: #ecebe7;
-      --muted: #9a988f;
-      --line: #2e2e33;
-      --accent: #ecebe7;
-      --flash: #4a4220;
-      --p-html: #9ca3af;
-      --p-top: #a78bfa;
-      --p-preload: #2dd4bf;
-      --p-setup: #60a5fa;
-      --p-draw: #fb8a5c;
-      --p-keyPressed: #4ade80;
-      --p-mousePressed: #f472b6;
-      --p-end: #facc15;
+      --bg: #0a0a0a; --text: #ededed; --muted: #8f8f8f; --faint: #5c5c5c;
+      --line: #222222; --hover: #161616; --code-bg: #121212; --code-fg: #e5e5e5; --flash: #2a2612;
+      --p-html: #a3a3a3; --p-top: #a78bfa; --p-preload: #2dd4bf; --p-setup: #60a5fa;
+      --p-draw: #fb923c; --p-keyPressed: #4ade80; --p-mousePressed: #f472b6; --p-end: #facc15;
+      --c-com: #5c5c5c; --c-str: #86efac; --c-num: #fdba74; --c-key: #c4b5fd; --c-fn: #93c5fd;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #141416;
-    --surface: #1d1d21;
-    --code-bg: #0e0e10;
-    --text: #ecebe7;
-    --muted: #9a988f;
-    --line: #2e2e33;
-    --accent: #ecebe7;
-    --flash: #4a4220;
-    --p-html: #9ca3af;
-    --p-top: #a78bfa;
-    --p-preload: #2dd4bf;
-    --p-setup: #60a5fa;
-    --p-draw: #fb8a5c;
-    --p-keyPressed: #4ade80;
-    --p-mousePressed: #f472b6;
-    --p-end: #facc15;
+    --bg: #0a0a0a; --text: #ededed; --muted: #8f8f8f; --faint: #5c5c5c;
+    --line: #222222; --hover: #161616; --code-bg: #121212; --code-fg: #e5e5e5; --flash: #2a2612;
+    --p-html: #a3a3a3; --p-top: #a78bfa; --p-preload: #2dd4bf; --p-setup: #60a5fa;
+    --p-draw: #fb923c; --p-keyPressed: #4ade80; --p-mousePressed: #f472b6; --p-end: #facc15;
+    --c-com: #5c5c5c; --c-str: #86efac; --c-num: #fdba74; --c-key: #c4b5fd; --c-fn: #93c5fd;
   }
 
   * { box-sizing: border-box; }
-  html { scroll-padding-top: 140px; }
+  html { scroll-padding-top: 24px; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font: 16px/1.5 "IBM Plex Sans", system-ui, sans-serif;
+    font: 15px/1.55 "Geist", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  code, pre, .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
-  a { color: inherit; }
+  code, pre, .mono { font-family: "Geist Mono", ui-monospace, Menlo, monospace; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
-
-  header { padding: 48px 0 24px; }
-  header h1 { margin: 0 0 4px; font-size: 32px; font-weight: 600; letter-spacing: -0.02em; }
-  header p { margin: 0; color: var(--muted); }
-
-  /* ---------- sketch map ---------- */
-  .map {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 24px;
-  }
-  .map h2 { margin: 0 0 4px; font-size: 15px; font-weight: 600; }
-  .map > p { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
-  .map-rows { display: grid; gap: 4px; }
-  .map-row {
-    display: grid;
-    grid-template-columns: 148px 1fr;
-    align-items: center;
-    gap: 12px;
-    padding: 6px 8px;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    background: none;
-    color: inherit;
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-  }
-  .map-row:hover { background: var(--bg); }
-  .map-row.active { border-color: var(--pc); background: var(--bg); }
-  .map-row code { font-size: 13px; color: var(--muted); white-space: pre; overflow: hidden; text-overflow: ellipsis; }
-  .map-row code b { color: var(--text); font-weight: 500; }
-
-  .chip {
-    --pc: var(--muted);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font: 500 12px/1 "IBM Plex Mono", ui-monospace, monospace;
-    color: var(--pc);
-    border: 1.5px solid var(--pc);
-    border-radius: 999px;
-    padding: 4px 9px;
-    white-space: nowrap;
-    width: max-content;
-  }
-  .chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--pc); }
-
-  /* ---------- toolbar ---------- */
-  .toolbar {
+  /* ---------- layout ---------- */
+  .layout { display: grid; grid-template-columns: 340px 1fr; min-height: 100vh; }
+  aside {
     position: sticky;
     top: 0;
-    z-index: 5;
-    background: var(--bg);
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 24px;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid var(--line);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
   }
+  main { padding: 32px 48px 96px; max-width: 920px; width: 100%; min-width: 0; }
+  aside { min-width: 0; }
+
+  /* ---------- sidebar ---------- */
+  .brand h1 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+  .brand p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+
   .search {
     width: 100%;
     font: inherit;
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    background: var(--surface);
+    font-size: 15px;
+    padding: 10px 0;
+    border: 0;
+    border-bottom: 1px solid var(--text);
+    background: transparent;
     color: var(--text);
+    border-radius: 0;
   }
-  .search:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
-  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; align-items: center; }
-  .pill {
-    font: 500 13px/1 "IBM Plex Sans", sans-serif;
-    padding: 7px 12px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--text);
-    cursor: pointer;
-  }
-  .pill[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-  .sep { width: 1px; height: 20px; background: var(--line); margin: 0 4px; }
-  .status { font-size: 13px; color: var(--muted); margin-top: 8px; min-height: 20px; }
-  .status button { font: inherit; background: none; border: none; color: var(--text); text-decoration: underline; cursor: pointer; padding: 0; }
+  .search::placeholder { color: var(--faint); }
+  .search:focus { outline: none; border-bottom-width: 2px; padding-bottom: 9px; }
 
-  /* ---------- cards ---------- */
-  .cat { margin: 32px 0 12px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 14px;
-    transition: background 0.6s;
+  .label {
+    font: 500 11px/1 "Geist Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 10px;
   }
-  .card.flash { background: var(--flash); }
-  .card-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .card h3 { margin: 0; font-size: 18px; font-weight: 600; }
-  .card h3 a { text-decoration: none; }
-  .card h3 a:hover { text-decoration: underline; }
-  .level { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; }
-  .desc { margin: 6px 0 0; color: var(--muted); }
 
-  .part { margin-top: 16px; }
-  .part-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
-  .step { font: 500 12px/1 "IBM Plex Mono", monospace; color: var(--muted); }
+  .places { display: flex; flex-direction: column; }
+  .place {
+    display: grid;
+    grid-template-columns: 10px auto 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 8px;
+    margin: 0 -8px;
+    text-align: left;
+    border-radius: 4px;
+  }
+  .place:hover { background: var(--hover); }
+  .place .sq { width: 8px; height: 8px; background: var(--pc); }
+  .place .name { font: 500 13px/1.2 "Geist Mono", monospace; }
+  .place .what { font-size: 12.5px; color: var(--muted); text-align: right; white-space: nowrap; }
+  .place[aria-pressed="true"] { background: var(--hover); }
+  .place[aria-pressed="true"] .name { color: var(--pc); }
+  .places-help { font-size: 12.5px; color: var(--faint); margin: 8px 0 0; }
+
+  .topics { display: flex; flex-direction: column; }
+  .topic {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 5px 8px;
+    margin: 0 -8px;
+    border-radius: 4px;
+    text-align: left;
+    color: var(--muted);
+  }
+  .topic:hover { background: var(--hover); color: var(--text); }
+  .topic[aria-pressed="true"] { color: var(--text); font-weight: 500; }
+  .topic .n { font: 12px "Geist Mono", monospace; color: var(--faint); }
+
+  .seg { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 6px; padding: 2px; }
+  .seg button { padding: 6px 4px; font-size: 13px; color: var(--muted); border-radius: 4px; }
+  .seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+
+  .side-foot { margin-top: auto; display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; color: var(--faint); }
+  .side-foot button:hover { color: var(--text); }
+
+  /* ---------- results ---------- */
+  .results-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 16px;
+    font: 12.5px "Geist Mono", monospace;
+    color: var(--muted);
+  }
+  .results-head button { text-decoration: underline; text-underline-offset: 3px; }
+  .results-head button:hover { color: var(--text); }
+
+  .cat {
+    margin: 48px 0 0;
+    padding-bottom: 12px;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+  .cat:first-of-type { margin-top: 8px; }
+
+  .snip {
+    border-top: 1px solid var(--line);
+    padding: 28px 0 32px;
+    transition: background 0.8s;
+  }
+  .snip.flash { background: var(--flash); }
+  .snip-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  .snip h3 { margin: 0; font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
+  .snip h3 a { color: inherit; text-decoration: none; }
+  .snip h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .lvl { font: 11px "Geist Mono", monospace; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); white-space: nowrap; }
+  .desc { margin: 4px 0 0; color: var(--muted); max-width: 60ch; }
+
+  .part { margin-top: 20px; }
+  .part-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .step { font: 12px "Geist Mono", monospace; color: var(--faint); }
+  .where { display: inline-flex; align-items: center; gap: 7px; font: 500 12.5px "Geist Mono", monospace; color: var(--pc); }
+  .where::before { content: ""; width: 8px; height: 8px; background: var(--pc); }
   .hint { font-size: 13px; color: var(--muted); }
-  .note { font-size: 13px; margin: 0 0 6px; }
-  .note::before { content: "→ "; color: var(--muted); }
+  .note { font-size: 13.5px; margin: 0 0 8px; }
 
   .code { position: relative; }
   .code pre {
     margin: 0;
     background: var(--code-bg);
     color: var(--code-fg);
-    border-radius: 10px;
-    border-left: 4px solid var(--pc);
-    padding: 14px 16px;
-    padding-right: 76px;
-    font-size: 13.5px;
-    line-height: 1.6;
+    border-left: 2px solid var(--pc);
+    padding: 16px 18px;
+    padding-right: 72px;
+    font-size: 13px;
+    line-height: 1.7;
     overflow-x: auto;
   }
   .copy {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    font: 500 12px/1 "IBM Plex Sans", sans-serif;
-    padding: 7px 10px;
-    border-radius: 6px;
-    border: 1px solid #3a3a42;
-    background: #26262c;
-    color: #e8e6e1;
-    cursor: pointer;
+    top: 10px;
+    right: 10px;
+    font: 500 11px "Geist Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 5px 8px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--muted);
   }
-  .copy:hover { background: #33333a; }
-  .copy.done { background: #e8e6e1; color: #1b1b1f; }
+  .copy:hover { color: var(--text); border-color: var(--muted); }
+  .copy.done { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-  .tip { margin: 14px 0 0; font-size: 14px; padding: 10px 12px; border-radius: 8px; background: var(--bg); }
-  .tip b { font-weight: 600; }
+  .tip { margin: 16px 0 0; font-size: 13.5px; color: var(--muted); max-width: 70ch; }
+  .tip b { color: var(--text); font-weight: 500; }
 
-  .t-com { color: var(--c-com); font-style: italic; }
+  .t-com { color: var(--c-com); }
   .t-str { color: var(--c-str); }
   .t-num { color: var(--c-num); }
   .t-key { color: var(--c-key); }
   .t-fn  { color: var(--c-fn); }
 
-  .empty { text-align: center; color: var(--muted); padding: 48px 0; }
+  .empty { color: var(--muted); padding: 64px 0; border-top: 1px solid var(--line); }
 
-  footer { padding: 48px 0 64px; color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-  footer button { font: inherit; background: none; border: none; color: inherit; text-decoration: underline; cursor: pointer; padding: 0; }
-
-  @media (max-width: 600px) {
-    header { padding-top: 28px; }
-    header h1 { font-size: 26px; }
-    .map-row { grid-template-columns: 1fr; gap: 4px; }
-    .card { padding: 16px; }
-    .toolbar { position: static; }
+  /* ---------- small screens ---------- */
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 24px 16px; gap: 24px; }
+    main { padding: 24px 16px 64px; }
+    .cat { font-size: 24px; }
+    .side-foot { margin-top: 0; }
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
+<div class="layout">
+
+  <aside>
+    <div class="brand">
       <h1 id="site-title">p5.js Snippets</h1>
       <p id="site-subtitle"></p>
-    </header>
-
-    <section class="map" aria-labelledby="map-title">
-      <h2 id="map-title">Where does it go?</h2>
-      <p>Every snippet is tagged with a colour. This is where each colour lives in your sketch. Click one to see only those snippets.</p>
-      <div class="map-rows" id="map"></div>
-    </section>
-  </div>
-
-  <div class="toolbar">
-    <div class="wrap">
-      <input class="search" id="search" type="search" placeholder="Search snippets — e.g. save, slider, webcam, pinch" aria-label="Search snippets" />
-      <div class="filters" id="filters"></div>
-      <div class="status" id="status" aria-live="polite"></div>
     </div>
-  </div>
 
-  <main class="wrap" id="list"></main>
+    <input class="search" id="search" type="search" placeholder="Search — save, slider, webcam…" aria-label="Search snippets" />
 
-  <div class="wrap">
-    <footer>
+    <section>
+      <p class="label">Where it goes</p>
+      <div class="places" id="places"></div>
+      <p class="places-help">In sketch order, top to bottom. Click to filter.</p>
+    </section>
+
+    <section>
+      <p class="label">Topic</p>
+      <div class="topics" id="topics"></div>
+    </section>
+
+    <section>
+      <p class="label">Level</p>
+      <div class="seg" id="levels"></div>
+    </section>
+
+    <div class="side-foot">
       <span id="site-footer"></span>
-      <button id="theme">Switch theme</button>
-    </footer>
-  </div>
+      <button id="theme">Theme</button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="results-head" id="status" aria-live="polite"></div>
+    <div id="list"></div>
+  </main>
+
+</div>
 
 <script src="snippets.js"></script>
 <script>
   // ---------- where-to-paste definitions ----------
   const PLACES = {
-    html:         { label: 'index.html',      map: '&lt;head&gt; … <b>&lt;script src="…"&gt;&lt;/script&gt;</b> … &lt;/head&gt;', hint: 'Open index.html and paste inside <head>, below the other <script> lines.' },
-    top:          { label: 'top of sketch',   map: '<b>let x = 0;</b>    // above setup, outside every function', hint: 'Paste at the very top of sketch.js, above function setup().' },
-    preload:      { label: 'preload()',       map: 'function preload() { <b>…</b> }', hint: 'Paste inside function preload() { }. No preload yet? Add one above setup().' },
-    setup:        { label: 'setup()',         map: 'function setup() { <b>…</b> }    // runs once', hint: 'Paste inside function setup() { }, after createCanvas(...).' },
-    draw:         { label: 'draw()',          map: 'function draw() { <b>…</b> }     // runs every frame', hint: 'Paste inside function draw() { }.' },
-    keyPressed:   { label: 'keyPressed()',    map: 'function keyPressed() { <b>…</b> }', hint: 'Paste inside function keyPressed() { }. No keyPressed yet? Add one at the end of your sketch. Only ever have one.' },
-    mousePressed: { label: 'mousePressed()',  map: 'function mousePressed() { <b>…</b> }', hint: 'Paste inside function mousePressed() { }. No mousePressed yet? Add one at the end of your sketch. Only ever have one.' },
-    end:          { label: 'end of sketch',   map: '<b>function myFunction() { … }</b>  // a new function', hint: 'Paste at the very end of sketch.js, after the last }, outside every function.' },
+    html:         { label: 'index.html',     what: 'inside <head>',     hint: 'Open index.html and paste inside <head>, below the other <script> lines.' },
+    top:          { label: 'top',            what: 'above setup()',     hint: 'Paste at the very top of sketch.js, above function setup().' },
+    preload:      { label: 'preload()',      what: 'loads files first', hint: 'Paste inside function preload() { }. No preload yet? Add one above setup().' },
+    setup:        { label: 'setup()',        what: 'runs once',         hint: 'Paste inside function setup() { }, after createCanvas(...).' },
+    draw:         { label: 'draw()',         what: 'runs every frame',  hint: 'Paste inside function draw() { }.' },
+    keyPressed:   { label: 'keyPressed()',   what: 'on key press',      hint: 'Paste inside function keyPressed() { }. None yet? Add one at the end of your sketch. Only ever have one.' },
+    mousePressed: { label: 'mousePressed()', what: 'on click',          hint: 'Paste inside function mousePressed() { }. None yet? Add one at the end of your sketch. Only ever have one.' },
+    end:          { label: 'end',            what: 'a new function',    hint: 'Paste at the very end of sketch.js, after the last }, outside every function.' },
   };
-
-  const LEVELS = { all: 'All levels', beginner: 'Beginner', intermediate: 'Intermediate' };
+  const LEVELS = { all: 'All', beginner: 'Beginner', intermediate: 'Inter.' };
 
   const state = { q: '', cat: 'All', level: 'all', place: null };
-
   const $ = (s) => document.querySelector(s);
-  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
   // ---------- tiny JS highlighter ----------
   const TOKEN = /(\/\/.*$)|('(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*")|(\b\d+(?:\.\d+)?\b)|(\b(?:let|const|var|function|if|else|for|of|return|new|true|false|while)\b)|(\b[a-zA-Z_]\w*(?=\s*\())/gm;
@@ -317,43 +313,20 @@
 
   // ---------- copy ----------
   async function copyText(text, btn) {
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch (e) {
+    try { await navigator.clipboard.writeText(text); }
+    catch (e) {
       const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      ta.remove();
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove();
     }
     btn.textContent = 'Copied';
     btn.classList.add('done');
     setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1400);
   }
 
-  // ---------- render map ----------
-  function renderMap() {
-    $('#map').innerHTML = Object.entries(PLACES).map(([k, p]) =>
-      '<button class="map-row' + (state.place === k ? ' active' : '') + '" data-place="' + k + '" style="--pc: var(--p-' + k + ')" aria-pressed="' + (state.place === k) + '">' +
-        '<span class="chip" style="--pc: var(--p-' + k + ')">' + esc(p.label) + '</span>' +
-        '<code>' + p.map + '</code>' +
-      '</button>'
-    ).join('');
-  }
-
-  // ---------- render filters ----------
-  function renderFilters() {
-    const cats = ['All', ...new Set(SNIPPETS.map((s) => s.category))];
-    let html = cats.map((c) => '<button class="pill" data-cat="' + esc(c) + '" aria-pressed="' + (state.cat === c) + '">' + esc(c) + '</button>').join('');
-    html += '<span class="sep"></span>';
-    html += Object.entries(LEVELS).map(([k, v]) => '<button class="pill" data-level="' + k + '" aria-pressed="' + (state.level === k) + '">' + v + '</button>').join('');
-    $('#filters').innerHTML = html;
-  }
-
-  // ---------- render list ----------
-  function matches(s) {
-    if (state.cat !== 'All' && s.category !== state.cat) return false;
+  // ---------- filtering ----------
+  function matches(s, ignoreCat) {
+    if (!ignoreCat && state.cat !== 'All' && s.category !== state.cat) return false;
     if (state.level !== 'all' && s.level !== state.level) return false;
     if (state.place && !s.parts.some((p) => p.where === state.place)) return false;
     if (state.q) {
@@ -363,8 +336,29 @@
     return true;
   }
 
+  // ---------- sidebar ----------
+  function renderSidebar() {
+    $('#places').innerHTML = Object.entries(PLACES).map(([k, p]) =>
+      '<button class="place" data-place="' + k + '" style="--pc: var(--p-' + k + ')" aria-pressed="' + (state.place === k) + '">' +
+        '<span class="sq"></span><span class="name">' + esc(p.label) + '</span><span class="what">' + esc(p.what) + '</span>' +
+      '</button>'
+    ).join('');
+
+    const pool = SNIPPETS.filter((s) => matches(s, true));
+    const cats = ['All', ...new Set(SNIPPETS.map((s) => s.category))];
+    $('#topics').innerHTML = cats.map((c) => {
+      const n = c === 'All' ? pool.length : pool.filter((s) => s.category === c).length;
+      return '<button class="topic" data-cat="' + esc(c) + '" aria-pressed="' + (state.cat === c) + '"><span>' + esc(c) + '</span><span class="n">' + n + '</span></button>';
+    }).join('');
+
+    $('#levels').innerHTML = Object.entries(LEVELS).map(([k, v]) =>
+      '<button data-level="' + k + '" aria-pressed="' + (state.level === k) + '">' + v + '</button>'
+    ).join('');
+  }
+
+  // ---------- results ----------
   function renderList() {
-    const shown = SNIPPETS.filter(matches);
+    const shown = SNIPPETS.filter((s) => matches(s));
     const groups = {};
     shown.forEach((s) => (groups[s.category] = groups[s.category] || []).push(s));
 
@@ -372,17 +366,17 @@
     for (const [cat, items] of Object.entries(groups)) {
       html += '<h2 class="cat">' + esc(cat) + '</h2>';
       for (const s of items) {
-        html += '<article class="card" id="' + esc(s.id) + '">';
-        html += '<div class="card-head"><h3><a href="#' + esc(s.id) + '">' + esc(s.title) + '</a></h3>';
-        html += '<span class="level">' + (s.level === 'intermediate' ? 'Intermediate' : 'Beginner') + '</span></div>';
+        html += '<article class="snip" id="' + esc(s.id) + '">';
+        html += '<div class="snip-head"><h3><a href="#' + esc(s.id) + '">' + esc(s.title) + '</a></h3>';
+        html += '<span class="lvl">' + esc(s.level) + '</span></div>';
         html += '<p class="desc">' + esc(s.description) + '</p>';
 
         s.parts.forEach((p, i) => {
           const place = PLACES[p.where] || { label: p.where, hint: '' };
           html += '<div class="part" style="--pc: var(--p-' + p.where + ')">';
           html += '<div class="part-head">';
-          if (s.parts.length > 1) html += '<span class="step">' + (i + 1) + '/' + s.parts.length + '</span>';
-          html += '<span class="chip" style="--pc: var(--p-' + p.where + ')">' + esc(place.label) + '</span>';
+          if (s.parts.length > 1) html += '<span class="step">' + String(i + 1).padStart(2, '0') + '</span>';
+          html += '<span class="where">' + esc(place.label) + '</span>';
           html += '<span class="hint">' + esc(place.hint) + '</span></div>';
           if (p.note) html += '<p class="note">' + esc(p.note) + '</p>';
           html += '<div class="code"><pre><code>' + highlight(p.code, p.where === 'html') + '</code></pre>';
@@ -390,22 +384,22 @@
           html += '</div>';
         });
 
-        if (s.tip) html += '<p class="tip"><b>Tip</b> · ' + esc(s.tip) + '</p>';
+        if (s.tip) html += '<p class="tip"><b>Tip</b> — ' + esc(s.tip) + '</p>';
         html += '</article>';
       }
     }
-    $('#list').innerHTML = html || '<p class="empty">No snippets match. Try another word.</p>';
+    $('#list').innerHTML = html || '<p class="empty">Nothing matches. Try another word.</p>';
 
     const filtered = state.q || state.cat !== 'All' || state.level !== 'all' || state.place;
-    let status = shown.length + ' of ' + SNIPPETS.length + ' snippets';
-    if (state.place) status += ' with a part for ' + PLACES[state.place].label;
-    $('#status').innerHTML = esc(status) + (filtered ? ' · <button id="reset">Show all</button>' : '');
+    let status = shown.length + ' / ' + SNIPPETS.length + ' snippets';
+    if (state.place) status += ' · ' + PLACES[state.place].label;
+    $('#status').innerHTML = '<span>' + esc(status) + '</span>' + (filtered ? '<button id="reset">Clear filters</button>' : '');
   }
 
-  function render() { renderMap(); renderFilters(); renderList(); }
+  function render() { renderSidebar(); renderList(); }
 
   // ---------- events ----------
-  $('#search').addEventListener('input', (e) => { state.q = e.target.value.trim(); renderList(); });
+  $('#search').addEventListener('input', (e) => { state.q = e.target.value.trim(); render(); });
 
   document.addEventListener('click', (e) => {
     const t = e.target.closest('button');
@@ -439,7 +433,7 @@
     if (!el) return;
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     el.classList.add('flash');
-    setTimeout(() => el.classList.remove('flash'), 1500);
+    setTimeout(() => el.classList.remove('flash'), 1600);
   }
   window.addEventListener('hashchange', flashHash);
 
