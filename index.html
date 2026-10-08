@@ -6,49 +6,59 @@
 <title>p5.js Snippets</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=National+Park:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #ffffff;
-    --text: #0a0a0a;
-    --muted: #737373;
-    --faint: #a3a3a3;
-    --line: #ebebeb;
-    --hover: #f5f5f5;
-    --code-bg: #f7f7f7;
-    --code-fg: #171717;
-    --flash: #fff8c5;
+    /* palette: cream · coral · blue · brown */
+    --bg: #ececec;
+    --text: #2b2b2b;
+    --muted: #6b6b6b;
+    --faint: #9c9c9c;
+    --line: #d6d6d6;
+    --hover: #e2e2e2;
+    --code-bg: #e2e2e2;
+    --code-fg: #2b2b2b;
+    --flash: #f6d3c8;
+    --coral: #e27d64;
+    --blue: #3a5a86;
+    --card: #2b2b2b;
+    --on-accent: #f2e9dc;
+    --on-pc: #ffffff;
+    --f-html: #d9663f;
+    --f-js: #e8c547;
 
-    --p-html: #737373;
-    --p-top: #7c3aed;
-    --p-preload: #0d9488;
-    --p-setup: #2563eb;
-    --p-draw: #ea580c;
-    --p-keyPressed: #16a34a;
-    --p-mousePressed: #db2777;
-    --p-end: #ca8a04;
+    --p-html: #7d7d7d;
+    --p-top: #3a5a86;
+    --p-preload: #4f8a76;
+    --p-setup: #c08a2e;
+    --p-draw: #e27d64;
+    --p-keyPressed: #6b8f4e;
+    --p-mousePressed: #b5577a;
+    --p-end: #7a5c99;
 
-    --c-com: #a3a3a3;
-    --c-str: #15803d;
-    --c-num: #c2410c;
-    --c-key: #7c3aed;
-    --c-fn: #2563eb;
+    --c-com: #9c9c9c;
+    --c-str: #5e7f3e;
+    --c-num: #b0731f;
+    --c-key: #3a5a86;
+    --c-fn: #c4583f;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #0a0a0a; --text: #ededed; --muted: #8f8f8f; --faint: #5c5c5c;
-      --line: #222222; --hover: #161616; --code-bg: #121212; --code-fg: #e5e5e5; --flash: #2a2612;
-      --p-html: #a3a3a3; --p-top: #a78bfa; --p-preload: #2dd4bf; --p-setup: #60a5fa;
-      --p-draw: #fb923c; --p-keyPressed: #4ade80; --p-mousePressed: #f472b6; --p-end: #facc15;
-      --c-com: #5c5c5c; --c-str: #86efac; --c-num: #fdba74; --c-key: #c4b5fd; --c-fn: #93c5fd;
+      --bg: #2a2a2a; --text: #ececec; --muted: #ababab; --faint: #777777;
+      --line: #3d3d3d; --hover: #333333; --code-bg: #222222; --code-fg: #ececec; --flash: #4a3a33;
+      --coral: #e8876f; --blue: #3a5a86; --card: #3a5a86; --on-accent: #f2e9dc; --on-pc: #222222;
+      --p-html: #a8a8a8; --p-top: #8fb0dc; --p-preload: #8cbfa9; --p-setup: #e2b65e;
+      --p-draw: #f0957d; --p-keyPressed: #a7c47f; --p-mousePressed: #e08aa8; --p-end: #b9a0d8;
+      --c-com: #777777; --c-str: #a7c47f; --c-num: #e2b65e; --c-key: #8fb0dc; --c-fn: #f0957d;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #0a0a0a; --text: #ededed; --muted: #8f8f8f; --faint: #5c5c5c;
-    --line: #222222; --hover: #161616; --code-bg: #121212; --code-fg: #e5e5e5; --flash: #2a2612;
-    --p-html: #a3a3a3; --p-top: #a78bfa; --p-preload: #2dd4bf; --p-setup: #60a5fa;
-    --p-draw: #fb923c; --p-keyPressed: #4ade80; --p-mousePressed: #f472b6; --p-end: #facc15;
-    --c-com: #5c5c5c; --c-str: #86efac; --c-num: #fdba74; --c-key: #c4b5fd; --c-fn: #93c5fd;
+    --bg: #2a2a2a; --text: #ececec; --muted: #ababab; --faint: #777777;
+    --line: #3d3d3d; --hover: #333333; --code-bg: #222222; --code-fg: #ececec; --flash: #4a3a33;
+    --coral: #e8876f; --blue: #3a5a86; --card: #3a5a86; --on-accent: #f2e9dc; --on-pc: #222222;
+    --p-html: #a8a8a8; --p-top: #8fb0dc; --p-preload: #8cbfa9; --p-setup: #e2b65e;
+    --p-draw: #f0957d; --p-keyPressed: #a7c47f; --p-mousePressed: #e08aa8; --p-end: #b9a0d8;
+    --c-com: #777777; --c-str: #a7c47f; --c-num: #e2b65e; --c-key: #8fb0dc; --c-fn: #f0957d;
   }
 
   * { box-sizing: border-box; }
@@ -57,11 +67,12 @@
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font: 15px/1.55 "Geist", system-ui, -apple-system, sans-serif;
+    font: 15px/1.55 "National Park", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  code, pre, .mono { font-family: "Geist Mono", ui-monospace, Menlo, monospace; }
+  code, pre, .mono { font-family: "DM Mono", ui-monospace, Menlo, monospace; }
   button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  a { color: inherit; }
 
   /* ---------- layout ---------- */
   .layout { display: grid; grid-template-columns: 340px 1fr; min-height: 100vh; }
@@ -75,11 +86,12 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+    min-width: 0;
   }
-  main { padding: 32px 48px 96px; max-width: 920px; width: 100%; min-width: 0; }
-  aside { min-width: 0; }
+  main { padding: 32px 48px 96px; max-width: 960px; width: 100%; min-width: 0; }
 
   /* ---------- sidebar ---------- */
+  .brand { text-decoration: none; display: block; }
   .brand h1 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
   .brand p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
 
@@ -95,14 +107,54 @@
     border-radius: 0;
   }
   .search::placeholder { color: var(--faint); }
-  .search:focus { outline: none; border-bottom-width: 2px; padding-bottom: 9px; }
+  .search:focus { outline: none; border-bottom: 2px solid var(--coral); padding-bottom: 9px; }
 
   .label {
-    font: 500 11px/1 "Geist Mono", monospace;
+    font: 500 12px/1 "DM Mono", ui-monospace, Menlo, monospace;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--muted);
     margin: 0 0 10px;
+  }
+
+  /* file badges: index.html vs sketch.js */
+  .ficon {
+    display: inline-grid; place-items: center;
+    min-width: 30px; height: 18px; padding: 0 4px;
+    border-radius: 3px;
+    font: 500 10px/1 "DM Mono", ui-monospace, Menlo, monospace; letter-spacing: 0.02em;
+  }
+  .ficon.html { background: var(--f-html); color: #fff; }
+  .ficon.js { background: var(--f-js); color: #2b2b2b; }
+
+  .file-group { border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px 6px; margin-bottom: 12px; }
+  .file-head {
+    display: flex; align-items: center; gap: 8px;
+    margin: 0 -10px 4px; padding: 8px 10px;
+    font: 500 13px/1 "DM Mono", ui-monospace, Menlo, monospace;
+    border-bottom: 1px solid var(--line);
+  }
+  .file-head small { margin-left: auto; font: 400 12px "National Park", sans-serif; color: var(--faint); }
+  .file-group .place { margin: 0 -4px; padding: 7px 4px; }
+
+  .two-files { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  .fcard { border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; background: var(--bg); }
+  .fcard-head { display: flex; align-items: center; gap: 8px; font: 500 14px/1 "DM Mono", ui-monospace, Menlo, monospace; }
+  .fcard-head small { margin-left: auto; font: 400 12.5px "National Park", sans-serif; color: var(--faint); }
+  .fcard h4 { margin: 12px 0 4px; font-size: 16px; font-weight: 600; }
+  .fcard p { margin: 0; font-size: 14px; color: var(--muted); }
+  .chain { margin-top: 12px; font: 13px "DM Mono", ui-monospace, Menlo, monospace; color: var(--muted); }
+  .chain b { color: var(--text); }
+  @media (max-width: 860px) { .two-files { grid-template-columns: 1fr; } }
+
+  .tab {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 12px 8px;
+    background: var(--code-bg);
+    border: 1px solid var(--line); border-bottom: 0;
+    border-radius: 6px 6px 0 0;
+    font: 500 13px/1 "DM Mono", ui-monospace, Menlo, monospace;
+    position: relative; top: 1px; z-index: 1;
   }
 
   .places { display: flex; flex-direction: column; }
@@ -113,16 +165,15 @@
     gap: 10px;
     padding: 7px 8px;
     margin: 0 -8px;
-    text-align: left;
     border-radius: 4px;
+    text-decoration: none;
   }
   .place:hover { background: var(--hover); }
   .place .sq { width: 8px; height: 8px; background: var(--pc); }
-  .place .name { font: 500 13px/1.2 "Geist Mono", monospace; }
+  .place .name { font: 500 13px/1.2 "DM Mono", ui-monospace, Menlo, monospace; }
   .place .what { font-size: 12.5px; color: var(--muted); text-align: right; white-space: nowrap; }
-  .place[aria-pressed="true"] { background: var(--hover); }
-  .place[aria-pressed="true"] .name { color: var(--pc); }
-  .places-help { font-size: 12.5px; color: var(--faint); margin: 8px 0 0; }
+  .place[aria-current="true"] { background: var(--hover); }
+  .place[aria-current="true"] .name { color: var(--pc); }
 
   .topics { display: flex; flex-direction: column; }
   .topic {
@@ -132,59 +183,154 @@
     padding: 5px 8px;
     margin: 0 -8px;
     border-radius: 4px;
-    text-align: left;
+    text-decoration: none;
     color: var(--muted);
   }
   .topic:hover { background: var(--hover); color: var(--text); }
-  .topic[aria-pressed="true"] { color: var(--text); font-weight: 500; }
-  .topic .n { font: 12px "Geist Mono", monospace; color: var(--faint); }
+  .topic[aria-current="true"] { color: var(--text); font-weight: 600; }
+  .topic .n { font: 12px "DM Mono", ui-monospace, Menlo, monospace; color: var(--faint); }
 
   .seg { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 6px; padding: 2px; }
   .seg button { padding: 6px 4px; font-size: 13px; color: var(--muted); border-radius: 4px; }
-  .seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+  .seg button[aria-pressed="true"] { background: var(--coral); color: var(--on-accent); }
 
   .side-foot { margin-top: auto; display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; color: var(--faint); }
   .side-foot button:hover { color: var(--text); }
 
-  /* ---------- results ---------- */
-  .results-head {
+  /* ---------- page headers ---------- */
+  .crumbs { font: 13px "DM Mono", ui-monospace, Menlo, monospace; color: var(--muted); margin-bottom: 20px; display: flex; justify-content: space-between; gap: 12px; }
+  .crumbs a { text-decoration: none; }
+  .crumbs a:hover { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+  .crumbs button { text-decoration: underline; text-underline-offset: 3px; }
+  .page-title { margin: 0; font-size: 36px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.15; }
+  .page-desc { margin: 10px 0 0; color: var(--muted); font-size: 16px; max-width: 62ch; }
+
+  /* ---------- home ---------- */
+  .start {
+    display: block;
+    margin: 36px 0 28px;
+    padding: 24px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--card);
+    color: var(--on-accent);
+    text-decoration: none;
+  }
+  .start:hover { filter: brightness(1.08); }
+  .start .fchip { background: transparent; border-color: color-mix(in srgb, var(--on-accent) 30%, transparent); color: var(--on-accent); }
+  .start-top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .start h3 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
+  .start p { margin: 6px 0 16px; color: color-mix(in srgb, var(--on-accent) 75%, transparent); }
+  .arrow { font-size: 18px; transition: transform 0.15s; }
+  a:hover > .start-top .arrow, a:hover .arrow { transform: translateX(4px); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .tile {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 16px;
-    font: 12.5px "Geist Mono", monospace;
+    flex-direction: column;
+    gap: 6px;
+    padding: 22px 22px 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    text-decoration: none;
+    min-height: 180px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .tile:hover { background: var(--hover); border-color: var(--muted); transform: translateY(-2px); }
+  .tile-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .tile h3 { margin: 0; font-size: 19px; font-weight: 500; letter-spacing: -0.01em; }
+  .tile p { margin: 0; color: var(--muted); font-size: 14px; }
+  .tile ul { margin: auto 0 0; padding: 12px 0 0; list-style: none; font: 12.5px/1.6 "DM Mono", ui-monospace, Menlo, monospace; color: var(--faint); }
+  .tile-n { font: 12px "DM Mono", ui-monospace, Menlo, monospace; color: var(--faint); white-space: nowrap; }
+
+  /* ---------- structure ---------- */
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .flow .sep { color: var(--faint); font-size: 13px; padding: 0 2px; }
+  .flow .gap { width: 14px; }
+  .fchip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 9px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    font: 500 12.5px "DM Mono", ui-monospace, Menlo, monospace;
+    text-decoration: none;
     color: var(--muted);
   }
-  .results-head button { text-decoration: underline; text-underline-offset: 3px; }
-  .results-head button:hover { color: var(--text); }
+  .fchip::before { content: ""; width: 8px; height: 8px; background: var(--pc); }
+  .fchip:hover { color: var(--text); border-color: var(--muted); }
+  .fchip[aria-current="true"] { color: var(--pc); border-color: var(--pc); }
 
-  .cat {
-    margin: 48px 0 0;
-    padding-bottom: 12px;
-    font-size: 28px;
-    font-weight: 500;
-    letter-spacing: -0.03em;
-  }
-  .cat:first-of-type { margin-top: 8px; }
+  .explain { margin: 32px 0 24px; padding: 20px 22px; border-radius: 8px; background: color-mix(in srgb, var(--pc) 9%, transparent); border: 1px solid color-mix(in srgb, var(--pc) 30%, transparent); }
+  .explain .where-big { font: 500 22px "DM Mono", ui-monospace, Menlo, monospace; color: var(--pc); }
+  .explain .runs { margin-top: 4px; font: 13px "DM Mono", ui-monospace, Menlo, monospace; color: var(--muted); }
+  .explain p { margin: 12px 0 0; max-width: 64ch; font-size: 16px; }
 
-  .snip {
-    border-top: 1px solid var(--line);
-    padding: 28px 0 32px;
-    transition: background 0.8s;
+  .pane { margin-top: 16px; }
+  
+  .skel {
+    margin: 0;
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 12px 0;
+    font-size: 13.5px;
+    line-height: 1.65;
+    overflow-x: auto;
   }
-  .snip.flash { background: var(--flash); }
+  .skel { padding: 12px 10px; border: 1px solid var(--line); border-radius: 0 6px 6px 6px; }
+  .skel .blk { display: block; padding: 0 8px; border: 1px solid transparent; border-radius: 6px; transition: opacity 0.2s; }
+  .skel .blk.off { opacity: 0.28; }
+  .skel .blk.on { padding: 6px 8px; margin: 4px 0; background: color-mix(in srgb, var(--pc) 12%, transparent); border-color: color-mix(in srgb, var(--pc) 45%, transparent); }
+  .skel .ln { display: block; white-space: pre; }
+
+  .uses { margin-top: 36px; }
+  .uses ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  .uses li a { display: inline-flex; align-items: baseline; gap: 10px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; font-size: 14px; }
+  .uses li a:hover { background: var(--hover); border-color: var(--muted); }
+  .uses li span { font: 12.5px "DM Mono", ui-monospace, Menlo, monospace; color: var(--faint); white-space: nowrap; }
+
+  .pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 40px; font: 13px "DM Mono", ui-monospace, Menlo, monospace; }
+  .pn a { text-decoration: none; color: var(--muted); }
+  .pn a:hover { color: var(--text); }
+
+  /* ---------- snippets ---------- */
+  .cat { margin: 48px 0 0; padding-bottom: 12px; font-size: 26px; font-weight: 500; letter-spacing: -0.03em; }
+  .list { margin-top: 32px; }
+  .snip { border-top: 1px solid var(--line); padding: 40px 0 40px; transition: background 0.8s, box-shadow 0.8s; }
+  .snip.flash { background: var(--flash); box-shadow: 0 0 0 16px var(--flash); border-radius: 8px; border-top-color: transparent; }
   .snip-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-  .snip h3 { margin: 0; font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
-  .snip h3 a { color: inherit; text-decoration: none; }
+  .snip h3 { margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+  .snip h3 a { text-decoration: none; }
   .snip h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .lvl { font: 11px "Geist Mono", monospace; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); white-space: nowrap; }
-  .desc { margin: 4px 0 0; color: var(--muted); max-width: 60ch; }
+  .lvl { font: 12px "DM Mono", ui-monospace, Menlo, monospace; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); white-space: nowrap; }
+  .desc { margin: 8px 0 4px; color: var(--muted); max-width: 60ch; font-size: 16px; }
 
   .part { margin-top: 20px; }
   .part-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
-  .step { font: 12px "Geist Mono", monospace; color: var(--faint); }
-  .where { display: inline-flex; align-items: center; gap: 7px; font: 500 12.5px "Geist Mono", monospace; color: var(--pc); }
-  .where::before { content: ""; width: 8px; height: 8px; background: var(--pc); }
+  .file { font: 500 11px/1 "DM Mono", ui-monospace, Menlo, monospace; padding: 4px 6px; border: 1px solid var(--line); border-radius: 3px; color: var(--muted); }
+  .paste-label { font: 500 11px "DM Mono", ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .where {
+    display: inline-flex; align-items: center;
+    padding: 5px 10px; border-radius: 6px;
+    background: var(--pc); color: var(--on-pc);
+    font: 500 13.5px "DM Mono", ui-monospace, Menlo, monospace;
+    text-decoration: none;
+  }
+  .where:hover { filter: brightness(1.08); }
+  .tab-where { color: var(--pc); }
+  .code .ctx { display: block; opacity: 0.4; }
+  .code .ins {
+    display: block;
+    margin: 4px -8px; padding: 4px 8px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--pc) 12%, transparent);
+    outline: 1px dashed color-mix(in srgb, var(--pc) 55%, transparent);
+  }
   .hint { font-size: 13px; color: var(--muted); }
   .note { font-size: 13.5px; margin: 0 0 8px; }
 
@@ -193,10 +339,11 @@
     margin: 0;
     background: var(--code-bg);
     color: var(--code-fg);
-    border-left: 2px solid var(--pc);
+    border: 1px solid var(--line);
+    border-radius: 0 6px 6px 6px;
     padding: 16px 18px;
     padding-right: 72px;
-    font-size: 13px;
+    font-size: 13.5px;
     line-height: 1.7;
     overflow-x: auto;
   }
@@ -204,7 +351,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    font: 500 11px "Geist Mono", monospace;
+    font: 500 12px "DM Mono", ui-monospace, Menlo, monospace;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     padding: 5px 8px;
@@ -217,7 +364,7 @@
   .copy.done { background: var(--text); color: var(--bg); border-color: var(--text); }
 
   .tip { margin: 16px 0 0; font-size: 13.5px; color: var(--muted); max-width: 70ch; }
-  .tip b { color: var(--text); font-weight: 500; }
+  .tip b { color: var(--text); font-weight: 600; }
 
   .t-com { color: var(--c-com); }
   .t-str { color: var(--c-str); }
@@ -225,15 +372,16 @@
   .t-key { color: var(--c-key); }
   .t-fn  { color: var(--c-fn); }
 
-  .empty { color: var(--muted); padding: 64px 0; border-top: 1px solid var(--line); }
+  .empty { color: var(--muted); padding: 48px 0; border-top: 1px solid var(--line); }
 
   /* ---------- small screens ---------- */
   @media (max-width: 860px) {
     .layout { grid-template-columns: 1fr; }
     aside { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 24px 16px; gap: 24px; }
     main { padding: 24px 16px 64px; }
-    .cat { font-size: 24px; }
+    .page-title { font-size: 28px; }
     .side-foot { margin-top: 0; }
+    .tile { min-height: 0; }
   }
 </style>
 </head>
@@ -241,21 +389,20 @@
 <div class="layout">
 
   <aside>
-    <div class="brand">
+    <a class="brand" href="#">
       <h1 id="site-title">p5.js Snippets</h1>
       <p id="site-subtitle"></p>
-    </div>
+    </a>
 
     <input class="search" id="search" type="search" placeholder="Search — save, slider, webcam…" aria-label="Search snippets" />
 
     <section>
-      <p class="label">Where it goes</p>
+      <p class="label">Sketch structure</p>
       <div class="places" id="places"></div>
-      <p class="places-help">In sketch order, top to bottom. Click to filter.</p>
     </section>
 
     <section>
-      <p class="label">Topic</p>
+      <p class="label">Topics</p>
       <div class="topics" id="topics"></div>
     </section>
 
@@ -270,31 +417,117 @@
     </div>
   </aside>
 
-  <main>
-    <div class="results-head" id="status" aria-live="polite"></div>
-    <div id="list"></div>
-  </main>
+  <main id="main"></main>
 
 </div>
 
 <script src="snippets.js"></script>
 <script>
-  // ---------- where-to-paste definitions ----------
+  // =================================================================
+  //  SKETCH STRUCTURE — the parts of a p5 sketch, in order
+  // =================================================================
   const PLACES = {
-    html:         { label: 'index.html',     what: 'inside <head>',     hint: 'Open index.html and paste inside <head>, below the other <script> lines.' },
-    top:          { label: 'top',            what: 'above setup()',     hint: 'Paste at the very top of sketch.js, above function setup().' },
-    preload:      { label: 'preload()',      what: 'loads files first', hint: 'Paste inside function preload() { }. No preload yet? Add one above setup().' },
-    setup:        { label: 'setup()',        what: 'runs once',         hint: 'Paste inside function setup() { }, after createCanvas(...).' },
-    draw:         { label: 'draw()',         what: 'runs every frame',  hint: 'Paste inside function draw() { }.' },
-    keyPressed:   { label: 'keyPressed()',   what: 'on key press',      hint: 'Paste inside function keyPressed() { }. None yet? Add one at the end of your sketch. Only ever have one.' },
-    mousePressed: { label: 'mousePressed()', what: 'on click',          hint: 'Paste inside function mousePressed() { }. None yet? Add one at the end of your sketch. Only ever have one.' },
-    end:          { label: 'end',            what: 'a new function',    hint: 'Paste at the very end of sketch.js, after the last }, outside every function.' },
+    html: {
+      file: 'index.html', label: '<head>', what: 'script tags', runs: 'Once, when the page opens',
+      hint: 'Open index.html and paste inside <head>, below the other <script> lines.',
+      explain: 'index.html is the page that holds your sketch. It loads p5.js, then any extra libraries (like ml5 or lil-gui), then your sketch.js. To add a library, paste its <script> tag inside <head>, after the p5 line.',
+    },
+    top: {
+      file: 'sketch.js', label: 'top', what: 'above setup()', runs: 'Once, before anything else',
+      hint: 'Paste at the very top of sketch.js, above function setup().',
+      explain: 'Variables made up here, outside every function, are remembered for as long as the sketch runs, and every function can use them. A variable made inside draw() is forgotten at the end of each frame — so anything that needs to change over time (a position, a score, a colour) lives up here.',
+    },
+    preload: {
+      file: 'sketch.js', label: 'preload()', what: 'loads files first', runs: 'Once, first',
+      hint: 'Paste inside function preload() { }. No preload yet? Add one above setup().',
+      explain: 'Use preload() to load images, sounds, fonts and models. p5 waits until everything in here has finished loading before it runs setup(), so your files are always ready to use.',
+    },
+    setup: {
+      file: 'sketch.js', label: 'setup()', what: 'runs once', runs: 'Once, when the sketch starts',
+      hint: 'Paste inside function setup() { }, after createCanvas(...).',
+      explain: 'setup() runs one time at the start. Make the canvas, start the webcam, and create sliders and buttons here — anything you only need to do once.',
+    },
+    draw: {
+      file: 'sketch.js', label: 'draw()', what: 'runs every frame', runs: 'Every frame, about 60 times a second',
+      hint: 'Paste inside function draw() { }.',
+      explain: 'draw() runs over and over, forever. Each run is one frame. Anything that moves, animates or reacts to input goes here. Code runs top to bottom, so shapes drawn later sit on top of earlier ones — that is why background() usually comes first.',
+    },
+    keyPressed: {
+      file: 'sketch.js', label: 'keyPressed()', what: 'on key press', runs: 'Once each time a key is pressed',
+      hint: 'Paste inside function keyPressed() { }. None yet? Add one at the end of your sketch. Only ever have one.',
+      explain: 'You never call keyPressed() yourself — p5 calls it for you whenever a key goes down. Use key to check which letter it was, or keyCode for keys like the arrows. Keep just one keyPressed() and put all your key checks inside it.',
+    },
+    mousePressed: {
+      file: 'sketch.js', label: 'mousePressed()', what: 'on click', runs: 'Once each time the mouse is clicked',
+      hint: 'Paste inside function mousePressed() { }. None yet? Add one at the end of your sketch. Only ever have one.',
+      explain: 'Like keyPressed(), p5 calls this for you — once per click. Great for one-off actions: change a colour, add a shape, play a sound. For things that should happen while the button is held down, use mouseIsPressed inside draw() instead.',
+    },
+    end: {
+      file: 'sketch.js', label: 'end', what: 'your own functions', runs: 'Whenever you call it',
+      hint: 'Paste at the very end of sketch.js, after the last }, outside every function.',
+      explain: 'You can write your own functions to name a chunk of code, then run it by calling its name — e.g. resetSketch(). p5 will not run these by itself: you call them, or a button or event does. Some names are special to p5 (like windowResized), and p5 calls those automatically.',
+    },
   };
-  const LEVELS = { all: 'All', beginner: 'Beginner', intermediate: 'Inter.' };
 
-  const state = { q: '', cat: 'All', level: 'all', place: null };
+  // the example sketch shown on the structure pages: [part, line]
+  const SKELETON = {
+    'index.html': [
+      [null, '<!DOCTYPE html>'],
+      [null, '<html>'],
+      [null, '  <head>'],
+      [null, '    <script src="p5.min.js"><\/script>'],
+      ['html', '    <!-- extra libraries go here -->'],
+      ['html', '    <script src="ml5.min.js"><\/script>'],
+      [null, '  <\/head>'],
+      [null, '  <body>'],
+      [null, '    <script src="sketch.js"><\/script>'],
+      [null, '  <\/body>'],
+      [null, '<\/html>'],
+    ],
+    'sketch.js': [
+      ['top', '// variables every function can use'],
+      ['top', 'let x = 0;'],
+      ['top', 'let img;'],
+      [null, ''],
+      ['preload', 'function preload() {'],
+      ['preload', "  img = loadImage('cat.jpg');"],
+      ['preload', '}'],
+      [null, ''],
+      ['setup', 'function setup() {'],
+      ['setup', '  createCanvas(400, 400);'],
+      ['setup', '}'],
+      [null, ''],
+      ['draw', 'function draw() {'],
+      ['draw', '  background(220);'],
+      ['draw', '  image(img, 0, 0, 100, 100);'],
+      ['draw', '  circle(x, 200, 50);'],
+      ['draw', '  x = x + 1;'],
+      ['draw', '}'],
+      [null, ''],
+      ['keyPressed', 'function keyPressed() {'],
+      ['keyPressed', "  if (key === 's') saveCanvas();"],
+      ['keyPressed', '}'],
+      [null, ''],
+      ['mousePressed', 'function mousePressed() {'],
+      ['mousePressed', '  resetSketch();'],
+      ['mousePressed', '}'],
+      [null, ''],
+      ['end', 'function resetSketch() {'],
+      ['end', '  x = 0;'],
+      ['end', '}'],
+    ],
+  };
+
+  const ORDER = Object.keys(PLACES);
+  const LEVELS = { all: 'All', beginner: 'Beginner', intermediate: 'Inter.' };
+  const TOPIC_TEXT = (typeof TOPICS !== 'undefined') ? TOPICS : {};
+  const CATS = [...new Set([...Object.keys(TOPIC_TEXT), ...SNIPPETS.map((s) => s.category)])]
+    .filter((c) => SNIPPETS.some((s) => s.category === c));
+
+  const state = { q: '', level: 'all', route: { view: 'home' } };
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const slug = (c) => c.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
   // ---------- tiny JS highlighter ----------
   const TOKEN = /(\/\/.*$)|('(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*")|(\b\d+(?:\.\d+)?\b)|(\b(?:let|const|var|function|if|else|for|of|return|new|true|false|while)\b)|(\b[a-zA-Z_]\w*(?=\s*\())/gm;
@@ -324,31 +557,71 @@
     setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1400);
   }
 
-  // ---------- filtering ----------
-  function matches(s, ignoreCat) {
-    if (!ignoreCat && state.cat !== 'All' && s.category !== state.cat) return false;
-    if (state.level !== 'all' && s.level !== state.level) return false;
-    if (state.place && !s.parts.some((p) => p.where === state.place)) return false;
-    if (state.q) {
-      const hay = [s.title, s.description, s.category, s.tip || '', ...s.parts.map((p) => p.code + ' ' + (p.note || ''))].join(' ').toLowerCase();
-      return state.q.toLowerCase().split(/\s+/).every((w) => hay.includes(w));
+  const ficon = (f) => f === 'index.html' ? '<i class="ficon html">HTML</i>' : '<i class="ficon js">JS</i>';
+  const tab = (f, where) => '<div class="tab">' + ficon(f) + f +
+    (where ? '<span class="tab-where">› ' + esc(PLACES[where].label) + '</span>' : '') + '</div>';
+
+  // faded lines shown around a snippet, so you can see where it sits
+  const CONTEXT = {
+    html:         { before: ['<head>', '  <script src="p5.min.js"><\/script>'], after: ['<\/head>'], indent: '  ' },
+    top:          { before: [], after: ['', 'function setup() { … }'], indent: '' },
+    preload:      { before: ['function preload() {'], after: ['}'], indent: '  ' },
+    setup:        { before: ['function setup() {', '  createCanvas(400, 400);'], after: ['}'], indent: '  ' },
+    draw:         { before: ['function draw() {'], after: ['}'], indent: '  ' },
+    keyPressed:   { before: ['function keyPressed() {'], after: ['}'], indent: '  ' },
+    mousePressed: { before: ['function mousePressed() {'], after: ['}'], indent: '  ' },
+    end:          { before: ['function draw() { … }', ''], after: [], indent: '' },
+  };
+  function codeInContext(code, where) {
+    const isHtml = where === 'html';
+    const ctx = CONTEXT[where] || { before: [], after: [], indent: '' };
+    const line = (l) => '<span class="ctx">' + (highlight(l, isHtml) || ' ') + '</span>';
+    const body = highlight(code, isHtml).split('\n').map((l) => ctx.indent + l).join('\n');
+    return ctx.before.map(line).join('') + '<span class="ins">' + body + '</span>' + ctx.after.map(line).join('');
+  }
+
+  // ---------- routing (#topic/canvas, #structure/setup, #snippet-id) ----------
+  function parseHash() {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (!h) return { view: 'home' };
+    if (h.startsWith('topic/')) {
+      const cat = CATS.find((c) => slug(c) === h.slice(6));
+      return cat ? { view: 'topic', cat } : { view: 'home' };
     }
-    return true;
+    if (h === 'structure') return { view: 'structure', place: 'setup' };
+    if (h.startsWith('structure/') && PLACES[h.slice(10)]) return { view: 'structure', place: h.slice(10) };
+    const s = SNIPPETS.find((x) => x.id === h);
+    if (s) return { view: 'topic', cat: s.category, focus: s.id };
+    return { view: 'home' };
+  }
+
+  // ---------- filtering ----------
+  const levelOk = (s) => state.level === 'all' || s.level === state.level;
+  function searchMatch(s) {
+    const hay = [s.title, s.description, s.category, s.tip || '', ...s.parts.map((p) => p.code + ' ' + (p.note || ''))].join(' ').toLowerCase();
+    return state.q.toLowerCase().split(/\s+/).every((w) => hay.includes(w));
   }
 
   // ---------- sidebar ----------
   function renderSidebar() {
-    $('#places').innerHTML = Object.entries(PLACES).map(([k, p]) =>
-      '<button class="place" data-place="' + k + '" style="--pc: var(--p-' + k + ')" aria-pressed="' + (state.place === k) + '">' +
-        '<span class="sq"></span><span class="name">' + esc(p.label) + '</span><span class="what">' + esc(p.what) + '</span>' +
-      '</button>'
-    ).join('');
+    const r = state.route;
+    let ph = '';
+    for (const f of ['index.html', 'sketch.js']) {
+      ph += '<div class="file-group"><div class="file-head">' + ficon(f) + f + '<small>' + (f === 'index.html' ? 'the page' : 'your code') + '</small></div>';
+      ph += ORDER.filter((k) => PLACES[k].file === f).map((k) => {
+        const p = PLACES[k];
+        const cur = !state.q && r.view === 'structure' && r.place === k;
+        return '<a class="place" href="#structure/' + k + '" style="--pc: var(--p-' + k + ')" aria-current="' + cur + '">' +
+          '<span class="sq"></span><span class="name">' + esc(p.label) + '</span><span class="what">' + esc(p.what) + '</span></a>';
+      }).join('');
+      ph += '</div>';
+    }
+    $('#places').innerHTML = ph;
 
-    const pool = SNIPPETS.filter((s) => matches(s, true));
-    const cats = ['All', ...new Set(SNIPPETS.map((s) => s.category))];
-    $('#topics').innerHTML = cats.map((c) => {
-      const n = c === 'All' ? pool.length : pool.filter((s) => s.category === c).length;
-      return '<button class="topic" data-cat="' + esc(c) + '" aria-pressed="' + (state.cat === c) + '"><span>' + esc(c) + '</span><span class="n">' + n + '</span></button>';
+    $('#topics').innerHTML = CATS.map((c) => {
+      const n = SNIPPETS.filter((s) => s.category === c && levelOk(s)).length;
+      const cur = !state.q && r.view === 'topic' && r.cat === c;
+      return '<a class="topic" href="#topic/' + slug(c) + '" aria-current="' + cur + '"><span>' + esc(c) + '</span><span class="n">' + n + '</span></a>';
     }).join('');
 
     $('#levels').innerHTML = Object.entries(LEVELS).map(([k, v]) =>
@@ -356,58 +629,173 @@
     ).join('');
   }
 
-  // ---------- results ----------
-  function renderList() {
-    const shown = SNIPPETS.filter((s) => matches(s));
-    const groups = {};
-    shown.forEach((s) => (groups[s.category] = groups[s.category] || []).push(s));
-
-    let html = '';
-    for (const [cat, items] of Object.entries(groups)) {
-      html += '<h2 class="cat">' + esc(cat) + '</h2>';
-      for (const s of items) {
-        html += '<article class="snip" id="' + esc(s.id) + '">';
-        html += '<div class="snip-head"><h3><a href="#' + esc(s.id) + '">' + esc(s.title) + '</a></h3>';
-        html += '<span class="lvl">' + esc(s.level) + '</span></div>';
-        html += '<p class="desc">' + esc(s.description) + '</p>';
-
-        s.parts.forEach((p, i) => {
-          const place = PLACES[p.where] || { label: p.where, hint: '' };
-          html += '<div class="part" style="--pc: var(--p-' + p.where + ')">';
-          html += '<div class="part-head">';
-          if (s.parts.length > 1) html += '<span class="step">' + String(i + 1).padStart(2, '0') + '</span>';
-          html += '<span class="where">' + esc(place.label) + '</span>';
-          html += '<span class="hint">' + esc(place.hint) + '</span></div>';
-          if (p.note) html += '<p class="note">' + esc(p.note) + '</p>';
-          html += '<div class="code"><pre><code>' + highlight(p.code, p.where === 'html') + '</code></pre>';
-          html += '<button class="copy" data-id="' + esc(s.id) + '" data-part="' + i + '">Copy</button></div>';
-          html += '</div>';
-        });
-
-        if (s.tip) html += '<p class="tip"><b>Tip</b> — ' + esc(s.tip) + '</p>';
-        html += '</article>';
-      }
-    }
-    $('#list').innerHTML = html || '<p class="empty">Nothing matches. Try another word.</p>';
-
-    const filtered = state.q || state.cat !== 'All' || state.level !== 'all' || state.place;
-    let status = shown.length + ' / ' + SNIPPETS.length + ' snippets';
-    if (state.place) status += ' · ' + PLACES[state.place].label;
-    $('#status').innerHTML = '<span>' + esc(status) + '</span>' + (filtered ? '<button id="reset">Clear filters</button>' : '');
+  // ---------- views ----------
+  function flowStrip(active) {
+    const chip = (k) => '<a class="fchip" href="#structure/' + k + '" style="--pc: var(--p-' + k + ')" aria-current="' + (active === k) + '">' + esc(PLACES[k].label) + '</a>';
+    return '<div class="flow">' +
+      chip('html') + '<span class="sep">→</span>' + chip('top') + '<span class="sep">→</span>' + chip('preload') + '<span class="sep">→</span>' +
+      chip('setup') + '<span class="sep">→</span>' + chip('draw') + '<span class="sep">↻</span><span class="gap"></span>' +
+      chip('keyPressed') + chip('mousePressed') + chip('end') +
+    '</div>';
   }
 
-  function render() { renderSidebar(); renderList(); }
+  function viewHome() {
+    let h = '<h2 class="page-title">' + esc(SITE.homeTitle || 'Pick a topic') + '</h2>';
+    h += '<p class="page-desc">' + esc(SITE.homeText || 'Each snippet tells you which file it goes in and where.') + '</p>';
+
+    h += '<a class="start" href="#structure/html">';
+    h += '<div class="start-top"><h3>Start here: how a sketch is put together</h3><span class="arrow">→</span></div>';
+    h += '<p>The parts of a p5.js sketch, what each one does, and when it runs.</p>';
+    h += flowStrip(null).replace(/<a /g, '<span ').replace(/<\/a>/g, '</span>').replace(/ href="[^"]*"/g, '');
+    h += '</a>';
+
+    h += '<div class="grid">';
+    for (const c of CATS) {
+      const items = SNIPPETS.filter((s) => s.category === c && levelOk(s));
+      h += '<a class="tile" href="#topic/' + slug(c) + '">';
+      h += '<div class="tile-top"><h3>' + esc(c) + '</h3><span class="tile-n">' + items.length + '</span></div>';
+      if (TOPIC_TEXT[c]) h += '<p>' + esc(TOPIC_TEXT[c]) + '</p>';
+      h += '<ul>' + items.slice(0, 3).map((s) => '<li>' + esc(s.title) + '</li>').join('') + (items.length > 3 ? '<li>…</li>' : '') + '</ul>';
+      h += '</a>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  function viewStructure(k) {
+    const p = PLACES[k];
+    const i = ORDER.indexOf(k);
+    let h = '<div class="crumbs"><span><a href="#">All topics</a> / Sketch structure</span></div>';
+    h += '<h2 class="page-title">How a sketch is put together</h2>';
+    h += '<p class="page-desc">A p5.js sketch is two files. Click each part to see where it lives and when it runs.</p>';
+    h += '<div class="two-files">';
+    h += '<div class="fcard"><div class="fcard-head">' + ficon('index.html') + 'index.html<small>the page</small></div>';
+    h += '<h4>HTML</h4><p>HTML is the language web pages are built from. index.html is the page your sketch lives on: it loads p5.js and any extra libraries with &lt;script&gt; tags, then loads your sketch.js. You rarely touch it, usually only to add a library.</p></div>';
+    h += '<div class="fcard"><div class="fcard-head">' + ficon('sketch.js') + 'sketch.js<small>your code</small></div>';
+    h += '<h4>p5.js (JavaScript)</h4><p>JavaScript is the programming language of the web, and p5.js is a JavaScript library that makes drawing, animation and interaction easy. sketch.js is where you write your code: shapes, colours, movement, and what happens when people click, type or move. This is where you spend most of your time.</p></div>';
+    h += '</div>';
+    h += '<p class="chain">The browser opens <b>index.html</b> → which loads <b>p5.js</b> → which runs your <b>sketch.js</b></p>';
+    h += '<div style="margin-top:28px">' + flowStrip(k) + '</div>';
+
+    h += '<div class="explain" style="--pc: var(--p-' + k + ')">';
+    h += '<div class="where-big">' + esc(p.label) + '</div>';
+    h += '<div class="runs">' + esc(p.file) + ' · runs: ' + esc(p.runs) + '</div>';
+    h += '<p>' + esc(p.explain) + '</p>';
+    h += '</div>';
+
+    // show the file this part lives in first
+    const files = p.file === 'index.html' ? ['index.html', 'sketch.js'] : ['sketch.js', 'index.html'];
+    for (const f of files) {
+      h += '<div class="pane">' + tab(f) + '<pre class="skel"><code>';
+      const blocks = [];
+      for (const [part, line] of SKELETON[f]) {
+        const last = blocks[blocks.length - 1];
+        if (last && last.part === part) last.lines.push(line);
+        else blocks.push({ part, lines: [line] });
+      }
+      h += blocks.map((b) => {
+        const style = b.part ? ' style="--pc: var(--p-' + b.part + ')"' : '';
+        const lines = b.lines.map((l) => '<span class="ln">' + (highlight(l, f === 'index.html') || ' ') + '</span>').join('');
+        return '<span class="blk ' + (b.part === k ? 'on' : 'off') + '"' + style + '>' + lines + '</span>';
+      }).join('');
+      h += '</code></pre></div>';
+    }
+
+    const uses = SNIPPETS.filter((s) => s.parts.some((x) => x.where === k) && levelOk(s));
+    if (uses.length) {
+      h += '<div class="uses"><p class="label">Snippets with a ' + esc(p.label) + ' part</p><ul>';
+      h += uses.map((s) => '<li><a href="#' + esc(s.id) + '">' + esc(s.title) + '<span>' + esc(s.category) + '</span></a></li>').join('');
+      h += '</ul></div>';
+    }
+
+    h += '<div class="pn">';
+    h += i > 0 ? '<a href="#structure/' + ORDER[i - 1] + '">← ' + esc(PLACES[ORDER[i - 1]].label) + '</a>' : '<span></span>';
+    h += i < ORDER.length - 1 ? '<a href="#structure/' + ORDER[i + 1] + '">' + esc(PLACES[ORDER[i + 1]].label) + ' →</a>' : '<span></span>';
+    h += '</div>';
+    return h;
+  }
+
+  function snippetHtml(s) {
+    let h = '<article class="snip" id="' + esc(s.id) + '">';
+    h += '<div class="snip-head"><h3><a href="#' + esc(s.id) + '">' + esc(s.title) + '</a></h3>';
+    h += '<span class="lvl">' + esc(s.level) + '</span></div>';
+    h += '<p class="desc">' + esc(s.description) + '</p>';
+    s.parts.forEach((p, i) => {
+      const place = PLACES[p.where] || { label: p.where, hint: '', file: '' };
+      h += '<div class="part" style="--pc: var(--p-' + p.where + ')">';
+      h += '<div class="part-head">';
+      h += '<span class="paste-label">Paste into</span><a class="where" href="#structure/' + esc(p.where) + '" title="What is ' + esc(place.label) + '?">' + esc(place.label) + '</a>';
+      h += '<span class="hint">' + esc(place.hint) + '</span></div>';
+      if (p.note) h += '<p class="note">' + esc(p.note) + '</p>';
+      h += tab(place.file, p.where) + '<div class="code"><pre><code>' + codeInContext(p.code, p.where) + '</code></pre>';
+      h += '<button class="copy" data-id="' + esc(s.id) + '" data-part="' + i + '">Copy</button></div>';
+      h += '</div>';
+    });
+    if (s.tip) h += '<p class="tip"><b>Tip</b> — ' + esc(s.tip) + '</p>';
+    return h + '</article>';
+  }
+
+  function viewTopic(cat) {
+    const items = SNIPPETS.filter((s) => s.category === cat && levelOk(s));
+    let h = '<div class="crumbs"><span><a href="#">All topics</a> / ' + esc(cat) + '</span><span>' + items.length + ' snippets</span></div>';
+    h += '<h2 class="page-title">' + esc(cat) + '</h2>';
+    if (TOPIC_TEXT[cat]) h += '<p class="page-desc">' + esc(TOPIC_TEXT[cat]) + '</p>';
+    h += '<div class="list">' + (items.map(snippetHtml).join('') || '<p class="empty">No snippets at this level. Try “All”.</p>') + '</div>';
+    return h;
+  }
+
+  function viewSearch() {
+    const items = SNIPPETS.filter((s) => levelOk(s) && searchMatch(s));
+    let h = '<div class="crumbs"><span>' + items.length + ' results</span><button id="clear-search">Clear search</button></div>';
+    h += '<h2 class="page-title">“' + esc(state.q) + '”</h2>';
+    if (!items.length) return h + '<p class="empty" style="margin-top:32px">Nothing matches. Try another word.</p>';
+    for (const c of CATS) {
+      const group = items.filter((s) => s.category === c);
+      if (!group.length) continue;
+      h += '<h3 class="cat">' + esc(c) + '</h3>' + group.map(snippetHtml).join('');
+    }
+    return h;
+  }
+
+  // ---------- render ----------
+  function render(scroll) {
+    const r = state.route;
+    renderSidebar();
+    let h;
+    if (state.q) h = viewSearch();
+    else if (r.view === 'structure') h = viewStructure(r.place);
+    else if (r.view === 'topic') h = viewTopic(r.cat);
+    else h = viewHome();
+    $('#main').innerHTML = h;
+
+    if (!scroll) return;
+    if (r.focus && !state.q) {
+      const el = document.getElementById(r.focus);
+      if (el) {
+        el.scrollIntoView({ block: 'start' });
+        el.classList.add('flash');
+        setTimeout(() => el.classList.remove('flash'), 1600);
+        return;
+      }
+    }
+    window.scrollTo(0, 0);
+  }
+
+  function route() {
+    state.route = parseHash();
+    if (state.q) { state.q = ''; $('#search').value = ''; }
+    render(true);
+  }
 
   // ---------- events ----------
-  $('#search').addEventListener('input', (e) => { state.q = e.target.value.trim(); render(); });
+  $('#search').addEventListener('input', (e) => { state.q = e.target.value.trim(); render(false); });
+  window.addEventListener('hashchange', route);
 
   document.addEventListener('click', (e) => {
     const t = e.target.closest('button');
     if (!t) return;
-    if (t.dataset.cat) { state.cat = t.dataset.cat; render(); }
-    else if (t.dataset.level) { state.level = t.dataset.level; render(); }
-    else if (t.dataset.place) { state.place = state.place === t.dataset.place ? null : t.dataset.place; render(); }
-    else if (t.id === 'reset') { state.q = ''; state.cat = 'All'; state.level = 'all'; state.place = null; $('#search').value = ''; render(); }
+    if (t.dataset.level) { state.level = t.dataset.level; render(false); }
+    else if (t.id === 'clear-search') { state.q = ''; $('#search').value = ''; render(true); }
     else if (t.classList.contains('copy')) {
       const s = SNIPPETS.find((x) => x.id === t.dataset.id);
       copyText(s.parts[+t.dataset.part].code, t);
@@ -420,31 +808,13 @@
     }
   });
 
-  // ---------- jump to #snippet from a link ----------
-  function flashHash() {
-    const id = decodeURIComponent(location.hash.slice(1));
-    if (!id) return;
-    let el = document.getElementById(id);
-    if (!el && SNIPPETS.some((s) => s.id === id)) {
-      state.q = ''; state.cat = 'All'; state.level = 'all'; state.place = null; $('#search').value = '';
-      render();
-      el = document.getElementById(id);
-    }
-    if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    el.classList.add('flash');
-    setTimeout(() => el.classList.remove('flash'), 1600);
-  }
-  window.addEventListener('hashchange', flashHash);
-
   // ---------- start ----------
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (err) {}
   document.title = SITE.title;
   $('#site-title').textContent = SITE.title;
   $('#site-subtitle').textContent = SITE.subtitle;
   $('#site-footer').textContent = SITE.footer;
-  render();
-  flashHash();
+  route();
 </script>
 </body>
 </html>

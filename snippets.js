@@ -23,6 +23,20 @@ const SITE = {
   footer: 'field:work · Workshops & Explorations',
 };
 
+// Topic buttons on the landing page, in this order.
+// Each category used below needs a short description here.
+const TOPICS = {
+  'Canvas': 'The drawing area: size, fullscreen, saving images and trails.',
+  'Mouse & Keyboard': 'React to the mouse, clicks and key presses.',
+  'Controls': 'Sliders, buttons, colour pickers and checkboxes built into p5.',
+  'Control Panel': 'A tidy panel of controls using the lil-gui library.',
+  'Camera & Media': 'Webcam, video files and images.',
+  'Sound': 'Play sound files and listen to the microphone.',
+  'Hand Tracking': 'Use your hands as input with ml5 handPose (MediaPipe).',
+  'Patterns & Motion': 'Loops, grids and movement over time.',
+  'Phone Control': 'Use your phone as a controller for a sketch on another screen.',
+};
+
 const SNIPPETS = [
   // -------------------------------------------------------------------
   // CANVAS
@@ -804,4 +818,100 @@ circle(width / 2, height / 2, size);`,
       },
     ],
   },
+  // -------------------------------------------------------------------
+  // PHONE CONTROL (p5.party)
+  // Two sketches: a DISPLAY on the laptop and a CONTROLLER on the phone.
+  // -------------------------------------------------------------------
+  {
+    id: 'phone-connect',
+    title: 'Connect two sketches (phone ↔ laptop)',
+    category: 'Phone Control',
+    level: 'intermediate',
+    description: 'Start here. Put this in BOTH sketches — the display and the controller. They join the same room and share one object.',
+    parts: [
+      {
+        where: 'html',
+        code: `<script src="https://cdn.jsdelivr.net/npm/p5.party@latest/dist/p5.party.js"></script>`,
+      },
+      {
+        where: 'top',
+        note: 'Use the same unique room name in both sketches.',
+        code: `const ROOM = 'my-room-123';
+let shared;`,
+      },
+      {
+        where: 'preload',
+        code: `partyConnect('wss://demoserver.p5party.org', 'phone-slider', ROOM);
+shared = partyLoadShared('controls', { size: 100 });`,
+      },
+    ],
+    tip: 'Anything you change in shared (e.g. shared.size = 50) appears in every sketch in the same room, almost instantly. Needs p5 1.x.',
+  },
+  {
+    id: 'phone-slider',
+    title: 'Phone slider (controller sketch)',
+    category: 'Phone Control',
+    level: 'intermediate',
+    description: 'A big slider for the phone. Moving it updates shared.size.',
+    parts: [
+      { where: 'top', code: `let slider;` },
+      {
+        where: 'setup',
+        code: `// createSlider(min, max, start, step)
+slider = createSlider(10, 600, shared.size, 1);
+slider.position(width * 0.1, height / 2);
+slider.style('width', width * 0.8 + 'px');
+
+slider.input(() => {
+  shared.size = slider.value();
+});`,
+      },
+      {
+        where: 'draw',
+        code: `// stay in sync if another phone changes it
+slider.value(shared.size);
+
+fill(255);
+textSize(48);
+text(shared.size, width / 2, height / 2 - 80);`,
+      },
+    ],
+    tip: 'Open the controller on your phone with File → Share → Fullscreen in the p5 editor. A QR code of that link makes it quick for a class.',
+  },
+  {
+    id: 'phone-viewport',
+    title: 'Make the controller phone-friendly',
+    category: 'Phone Control',
+    level: 'intermediate',
+    description: 'Stops the phone zooming out and makes the slider easier to drag with a thumb.',
+    parts: [
+      {
+        where: 'html',
+        code: `<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<style>
+  body { margin: 0; overflow: hidden; touch-action: none; }
+  input[type="range"] { height: 48px; accent-color: #ff4d6d; }
+</style>`,
+      },
+    ],
+  },
+  {
+    id: 'phone-display',
+    title: 'Use the phone value (display sketch)',
+    category: 'Phone Control',
+    level: 'intermediate',
+    description: 'Read shared.size in draw(). lerp() eases towards it so the circle moves smoothly.',
+    parts: [
+      { where: 'top', code: `let size = 100;` },
+      {
+        where: 'draw',
+        code: `size = lerp(size, shared.size, 0.2);
+noStroke();
+fill(255, 77, 109);
+circle(width / 2, height / 2, size);`,
+      },
+    ],
+    tip: 'Swap circle size for anything: colour, speed, rotation, the number of shapes in a grid.',
+  },
 ];
+
