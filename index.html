@@ -247,6 +247,48 @@
   .tile ul { margin: auto 0 0; padding: 12px 0 0; list-style: none; font: 12.5px/1.6 "DM Mono", ui-monospace, Menlo, monospace; color: var(--faint); }
   .tile-n { font: 12px "DM Mono", ui-monospace, Menlo, monospace; color: var(--faint); white-space: nowrap; }
 
+  /* ---------- beginner guide ---------- */
+  .guide-link {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 14px; border-radius: 10px;
+    background: var(--coral); color: var(--on-accent);
+    text-decoration: none; font-weight: 600;
+  }
+  .guide-link:hover, .guide-link[aria-current="true"] { filter: brightness(1.06); }
+  .guide-card {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    margin: 32px 0 0; padding: 20px 24px;
+    border-radius: 10px; background: var(--coral); color: var(--on-accent);
+    text-decoration: none;
+  }
+  .guide-card h3 { margin: 0; font-size: 20px; font-weight: 500; }
+  .guide-card p { margin: 4px 0 0; opacity: 0.85; }
+  .guide-card:hover { filter: brightness(1.06); }
+  .guide-card + .start { margin-top: 14px; }
+
+  .tips { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .tip-card { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .tip-card p { margin: 0; }
+  .tip-card pre {
+    margin: 10px 0 0; padding: 10px 12px; border-radius: 8px;
+    background: var(--code-bg); color: var(--code-fg);
+    font-size: 13px; line-height: 1.6; white-space: pre-wrap;
+  }
+  .lookup { display: grid; gap: 18px; }
+  .lookup .label { margin-bottom: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ref-chip {
+    padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px;
+    font: 500 13.5px "DM Mono", ui-monospace, monospace; text-decoration: none;
+  }
+  .ref-chip:hover { border-color: var(--muted); background: var(--hover); }
+  .prompts { margin: 0; padding-left: 0; list-style: none; counter-reset: p; display: grid; gap: 12px; }
+  .prompts li {
+    counter-increment: p; display: flex; gap: 14px; align-items: baseline;
+    padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; font-size: 16px;
+  }
+  .prompts li::before { content: counter(p); font: 500 13px "DM Mono", monospace; color: var(--coral); }
+
   /* ---------- structure ---------- */
   .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
   .flow .sep { color: var(--faint); font-size: 13px; padding: 0 2px; }
@@ -372,6 +414,20 @@
   .t-key { color: var(--c-key); }
   .t-fn  { color: var(--c-fn); }
 
+  /* hover help on shape numbers */
+  .tip { border-bottom: 1px dotted color-mix(in srgb, currentColor 45%, transparent); cursor: help; }
+  .tip:hover { background: color-mix(in srgb, var(--text) 10%, transparent); border-radius: 3px; }
+  .t-fn.tip { border-bottom: 0; }
+  #tooltip {
+    position: fixed; z-index: 50; pointer-events: none;
+    padding: 6px 10px; border-radius: 6px;
+    background: var(--text); color: var(--bg);
+    font: 500 12.5px "DM Mono", ui-monospace, monospace;
+    white-space: nowrap; opacity: 0; transform: translateY(4px);
+    transition: opacity 0.12s, transform 0.12s;
+  }
+  #tooltip.show { opacity: 1; transform: translateY(0); }
+
   .empty { color: var(--muted); padding: 48px 0; border-top: 1px solid var(--line); }
 
   /* ---------- small screens ---------- */
@@ -396,6 +452,8 @@
 
     <input class="search" id="search" type="search" placeholder="Search — save, slider, webcam…" aria-label="Search snippets" />
 
+    <a class="guide-link" id="guide-link" href="#guide">Beginner guide <span>→</span></a>
+
     <section>
       <p class="label">Sketch structure</p>
       <div class="places" id="places"></div>
@@ -418,6 +476,7 @@
   </aside>
 
   <main id="main"></main>
+  <div id="tooltip" role="tooltip"></div>
 
 </div>
 
@@ -531,8 +590,7 @@
 
   // ---------- tiny JS highlighter ----------
   const TOKEN = /(\/\/.*$)|('(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*")|(\b\d+(?:\.\d+)?\b)|(\b(?:let|const|var|function|if|else|for|of|return|new|true|false|while)\b)|(\b[a-zA-Z_]\w*(?=\s*\())/gm;
-  function highlight(code, isHtml) {
-    if (isHtml) return esc(code);
+  function tokenHighlight(code) {
     let out = '', last = 0, m;
     TOKEN.lastIndex = 0;
     while ((m = TOKEN.exec(code))) {
@@ -542,6 +600,112 @@
       last = TOKEN.lastIndex;
     }
     return out + esc(code.slice(last));
+  }
+
+  // ---------- what each number means (shown on hover) ----------
+  // name: what the number is · short explanation
+  const X = 'x · across, from the left';
+  const Y = 'y · down, from the top';
+  const SIG = {
+    circle:   [X, Y, 'diameter · how wide the circle is'],
+    ellipse:  { 3: [X, Y, 'size · width and height'], 4: [X, Y, 'width', 'height'] },
+    square:   { 3: [X, Y, 'size · width and height'], 4: [X, Y, 'size', 'corner roundness'] },
+    rect:     { 4: [X, Y, 'width', 'height'], 5: [X, Y, 'width', 'height', 'corner roundness'] },
+    line:     ['x1 · start, across', 'y1 · start, down', 'x2 · end, across', 'y2 · end, down'],
+    point:    [X, Y],
+    triangle: ['x1 · corner 1, across', 'y1 · corner 1, down', 'x2 · corner 2, across', 'y2 · corner 2, down', 'x3 · corner 3, across', 'y3 · corner 3, down'],
+    quad:     ['x1 · corner 1', 'y1 · corner 1', 'x2 · corner 2', 'y2 · corner 2', 'x3 · corner 3', 'y3 · corner 3', 'x4 · corner 4', 'y4 · corner 4'],
+    arc:      [X, Y, 'width', 'height', 'start · angle where it starts', 'stop · angle where it ends'],
+    text:     ['text · what to write', X, Y],
+    fill:     { 1: ['colour · or a grey from 0 (black) to 255 (white)'], 2: ['grey · 0 to 255', 'alpha · see-through, 0 to 255'], 3: ['red · 0 to 255', 'green · 0 to 255', 'blue · 0 to 255'], 4: ['red · 0 to 255', 'green · 0 to 255', 'blue · 0 to 255', 'alpha · see-through, 0 to 255'] },
+    stroke:   { 1: ['colour · or a grey from 0 (black) to 255 (white)'], 2: ['grey · 0 to 255', 'alpha · see-through, 0 to 255'], 3: ['red · 0 to 255', 'green · 0 to 255', 'blue · 0 to 255'], 4: ['red · 0 to 255', 'green · 0 to 255', 'blue · 0 to 255', 'alpha · see-through, 0 to 255'] },
+    background: { 1: ['colour · or a grey from 0 (black) to 255 (white)'], 2: ['grey · 0 to 255', 'alpha · see-through, 0 to 255'], 3: ['red · 0 to 255', 'green · 0 to 255', 'blue · 0 to 255'], 4: ['red · 0 to 255', 'green · 0 to 255', 'blue · 0 to 255', 'alpha · see-through, 0 to 255'] },
+    strokeWeight: ['thickness · of lines and outlines, in pixels'],
+    textSize: ['size · of the text, in pixels'],
+    createCanvas: ['width · of the canvas', 'height · of the canvas'],
+    resizeCanvas: ['width', 'height'],
+    image:    { 3: ['image', X, Y], 5: ['image', X, Y, 'width', 'height'] },
+    translate: ['x · move across', 'y · move down'],
+    rotate:   ['angle · how far to turn'],
+    scale:    { 1: ['amount · 1 = normal size, 2 = double'], 2: ['x amount', 'y amount'] },
+    map:      ['value · the number to convert', 'from min', 'from max', 'to min', 'to max'],
+    random:   { 1: ['max · up to this number'], 2: ['min', 'max'] },
+    lerp:     ['start', 'stop', 'amount · 0 = start, 1 = stop'],
+    dist:     ['x1', 'y1', 'x2', 'y2'],
+    noise:    { 1: ['x'], 2: ['x', 'y'], 3: ['x', 'y', 'z · often time'] },
+    sin:      ['angle'],
+    cos:      ['angle'],
+    createSlider: { 3: ['min', 'max', 'start value'], 4: ['min', 'max', 'start value', 'step · how much each move changes it'] },
+    createColorPicker: ['start colour'],
+    saveCanvas: ['file name', 'file type · png or jpg'],
+  };
+
+  function sigFor(name, count) {
+    const s = SIG[name];
+    if (!s) return null;
+    if (Array.isArray(s)) return s;
+    if (s[count]) return s[count];
+    const keys = Object.keys(s).map(Number).sort((a, b) => a - b);
+    return s[keys.filter((k) => k <= count).pop() || keys[0]];
+  }
+
+  function matchParen(code, open) {
+    let depth = 0, q = null;
+    for (let i = open; i < code.length; i++) {
+      const ch = code[i];
+      if (q) { if (ch === '\\') i++; else if (ch === q) q = null; continue; }
+      if (ch === '"' || ch === "'") q = ch;
+      else if (ch === '(') depth++;
+      else if (ch === ')') { depth--; if (depth === 0) return i; }
+    }
+    return -1;
+  }
+
+  function splitArgs(s) {
+    const parts = []; let depth = 0, q = null, start = 0;
+    for (let i = 0; i < s.length; i++) {
+      const ch = s[i];
+      if (q) { if (ch === '\\') i++; else if (ch === q) q = null; continue; }
+      if (ch === '"' || ch === "'") q = ch;
+      else if ('([{'.includes(ch)) depth++;
+      else if (')]}'.includes(ch)) depth--;
+      else if (ch === ',' && depth === 0) { parts.push(s.slice(start, i)); start = i + 1; }
+    }
+    parts.push(s.slice(start));
+    return s.trim() === '' ? [] : parts;
+  }
+
+  const inComment = (code, idx) => code.slice(code.lastIndexOf('\n', idx - 1) + 1, idx).includes('//');
+
+  function highlight(code, isHtml) {
+    if (isHtml) return esc(code);
+    const CALL = /\b([a-zA-Z_]\w*)\s*\(/g;
+    let out = '', last = 0, m;
+    while ((m = CALL.exec(code))) {
+      const name = m[1];
+      if (!SIG[name] || code[m.index - 1] === '.' || inComment(code, m.index)) continue;
+      const open = m.index + m[0].length - 1;
+      const close = matchParen(code, open);
+      if (close < 0) continue;
+      const args = splitArgs(code.slice(open + 1, close));
+      const names = sigFor(name, args.length) || [];
+
+      out += tokenHighlight(code.slice(last, m.index));
+      const sig = name + '(' + names.map((n) => n.split(' · ')[0]).join(', ') + ')';
+      out += '<span class="t-fn tip" data-tip="' + esc(sig) + '">' + esc(name) + '</span>' + esc(code.slice(m.index + name.length, open + 1));
+      args.forEach((a, k) => {
+        const lead = a.match(/^\s*/)[0];
+        const body = a.slice(lead.length).replace(/\s+$/, '');
+        const trail = a.slice(lead.length + body.length);
+        const inner = highlight(body, false);
+        out += esc(lead) + (names[k] ? '<span class="tip arg" data-tip="' + esc(names[k]) + '">' + inner + '</span>' : inner) + esc(trail);
+        if (k < args.length - 1) out += ',';
+      });
+      out += ')';
+      last = close + 1;
+      CALL.lastIndex = close + 1;
+    }
+    return out + tokenHighlight(code.slice(last));
   }
 
   // ---------- copy ----------
@@ -584,6 +748,7 @@
   function parseHash() {
     const h = decodeURIComponent(location.hash.slice(1));
     if (!h) return { view: 'home' };
+    if (h === 'guide') return { view: 'guide' };
     if (h.startsWith('topic/')) {
       const cat = CATS.find((c) => slug(c) === h.slice(6));
       return cat ? { view: 'topic', cat } : { view: 'home' };
@@ -605,6 +770,7 @@
   // ---------- sidebar ----------
   function renderSidebar() {
     const r = state.route;
+    $('#guide-link').setAttribute('aria-current', String(!state.q && r.view === 'guide'));
     let ph = '';
     for (const f of ['index.html', 'sketch.js']) {
       ph += '<div class="file-group"><div class="file-head">' + ficon(f) + f + '<small>' + (f === 'index.html' ? 'the page' : 'your code') + '</small></div>';
@@ -643,6 +809,10 @@
     let h = '<h2 class="page-title">' + esc(SITE.homeTitle || 'Pick a topic') + '</h2>';
     h += '<p class="page-desc">' + esc(SITE.homeText || 'Each snippet tells you which file it goes in and where.') + '</p>';
 
+    if (typeof GUIDE !== 'undefined') {
+      h += '<a class="guide-card" href="#guide"><div><h3>New to p5.js? Read the beginner guide</h3>';
+      h += '<p>Tips, functions to look up, and three prompts to try.</p></div><span class="arrow">→</span></a>';
+    }
     h += '<a class="start" href="#structure/html">';
     h += '<div class="start-top"><h3>Start here: how a sketch is put together</h3><span class="arrow">→</span></div>';
     h += '<p>The parts of a p5.js sketch, what each one does, and when it runs.</p>';
@@ -735,6 +905,40 @@
     return h + '</article>';
   }
 
+  function viewGuide() {
+    if (typeof GUIDE === 'undefined') return viewHome();
+    const ref = (n) => 'https://p5js.org/reference/p5/' + n + '/';
+    let h = '<div class="crumbs"><span><a href="#">All topics</a> / ' + esc(GUIDE.title) + '</span></div>';
+    h += '<h2 class="page-title">' + esc(GUIDE.title) + '</h2>';
+    h += '<p class="page-desc">' + esc(GUIDE.intro) + '</p>';
+
+    h += '<h3 class="cat">Tips</h3><div class="tips">';
+    for (const t of GUIDE.tips) {
+      h += '<div class="tip-card"><p>' + esc(t.tip) + '</p>';
+      if (t.code) h += '<pre><code>' + highlight(t.code, false) + '</code></pre>';
+      h += '</div>';
+    }
+    h += '</div>';
+
+    h += '<h3 class="cat">Look these up</h3>';
+    h += '<p class="page-desc" style="margin-top:0">Each one opens its page on the p5.js reference. The ones without brackets are variables p5 keeps updated for you.</p>';
+    h += '<div class="lookup">';
+    for (const g of GUIDE.lookup) {
+      h += '<div class="lookup-group"><p class="label">' + esc(g.group) + '</p><div class="chips">';
+      for (const n of g.items) {
+        const isVar = (GUIDE.variables || []).includes(n);
+        h += '<a class="ref-chip" href="' + ref(n) + '" target="_blank" rel="noopener">' + esc(n) + (isVar ? '' : '()') + '</a>';
+      }
+      h += '</div></div>';
+    }
+    h += '</div>';
+
+    h += '<h3 class="cat">Try these</h3><ol class="prompts">';
+    GUIDE.prompts.forEach((p) => { h += '<li>' + esc(p) + '</li>'; });
+    h += '</ol>';
+    return h;
+  }
+
   function viewTopic(cat) {
     const items = SNIPPETS.filter((s) => s.category === cat && levelOk(s));
     let h = '<div class="crumbs"><span><a href="#">All topics</a> / ' + esc(cat) + '</span><span>' + items.length + ' snippets</span></div>';
@@ -765,6 +969,7 @@
     if (state.q) h = viewSearch();
     else if (r.view === 'structure') h = viewStructure(r.place);
     else if (r.view === 'topic') h = viewTopic(r.cat);
+    else if (r.view === 'guide') h = viewGuide();
     else h = viewHome();
     $('#main').innerHTML = h;
 
@@ -807,6 +1012,25 @@
       try { localStorage.setItem('theme', root.dataset.theme); } catch (err) {}
     }
   });
+
+  // ---------- hover tooltips for numbers ----------
+  const tipEl = document.getElementById('tooltip');
+  function showTip(el) {
+    tipEl.textContent = el.dataset.tip;
+    const r = el.getBoundingClientRect();
+    tipEl.classList.add('show');
+    const w = tipEl.offsetWidth;
+    let left = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), window.innerWidth - w - 8);
+    let top = r.top - tipEl.offsetHeight - 8;
+    if (top < 8) top = r.bottom + 8;
+    tipEl.style.left = left + 'px';
+    tipEl.style.top = top + 'px';
+  }
+  document.addEventListener('mouseover', (e) => {
+    const el = e.target.closest('.tip');
+    if (el) showTip(el); else tipEl.classList.remove('show');
+  });
+  document.addEventListener('scroll', () => tipEl.classList.remove('show'), true);
 
   // ---------- start ----------
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (err) {}

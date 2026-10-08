@@ -26,6 +26,7 @@ const SITE = {
 // Topic buttons on the landing page, in this order.
 // Each category used below needs a short description here.
 const TOPICS = {
+  'Shapes': 'The basic shapes, and what each number means. Hover over a number to find out.',
   'Canvas': 'The drawing area: size, fullscreen, saving images and trails.',
   'Mouse & Keyboard': 'React to the mouse, clicks and key presses.',
   'Controls': 'Sliders, buttons, colour pickers and checkboxes built into p5.',
@@ -37,7 +38,161 @@ const TOPICS = {
   'Phone Control': 'Use your phone as a controller for a sketch on another screen.',
 };
 
+// Beginner guide page (#guide): tips, functions to look up, and prompts.
+// `code` is shown in code style. Everything else is plain text.
+const GUIDE = {
+  title: 'Beginner guide',
+  intro: 'New to p5.js? Start with these tips, look up the functions, then try the prompts.',
+
+  tips: [
+    { tip: 'Code uses American spelling.', code: 'color()  center  gray' },
+    { tip: 'Names use camelCase: start lowercase, capitalise each new word.', code: 'mouseX  strokeWeight()  createCanvas()' },
+    { tip: 'Capitals matter. Fill() and mousex will not work.', code: 'fill()  mouseX' },
+    { tip: 'End each line with a semicolon. A good habit, even though p5 often forgives you.', code: 'circle(200, 200, 50);' },
+    { tip: 'Brackets come in pairs. Every ( needs a ) and every { needs a }. Most errors are a missing one.', code: 'function draw() { … }' },
+    { tip: 'Put commas between numbers.', code: 'ellipse(200, 200, 50)' },
+    { tip: 'Text goes in quotes. Without quotes, p5 thinks it is a variable.', code: "text('hello', 50, 50)" },
+    { tip: 'Order matters. fill() comes before the shape it colours, and later shapes are drawn on top.', code: 'fill(255, 0, 0);\ncircle(200, 200, 50);' },
+    { tip: '(0, 0) is the top-left corner. x goes right, y goes down.', code: 'point(0, 0)' },
+    { tip: 'setup() runs once. draw() runs over and over, so anything that moves goes in draw().', code: '' },
+    { tip: 'Read the error. The console at the bottom tells you which line is the problem.', code: '' },
+    { tip: 'Change one thing at a time, then press play.', code: '' },
+    { tip: 'Leave notes with //. Anything after // is ignored by the computer.', code: '// this is a note' },
+  ],
+
+  // shown as links to the p5.js reference
+  lookup: [
+    { group: 'Setting up', items: ['createCanvas', 'background'] },
+    { group: 'Shapes', items: ['ellipse', 'circle', 'rect', 'square', 'line', 'triangle', 'point', 'text'] },
+    { group: 'Colour and outline', items: ['fill', 'noFill', 'stroke', 'noStroke', 'strokeWeight', 'textSize'] },
+    { group: 'Mouse and keys', items: ['mouseX', 'mouseY', 'mouseIsPressed', 'mousePressed', 'keyPressed'] },
+    { group: 'Changing numbers', items: ['random', 'map', 'frameCount'] },
+    { group: 'Saving', items: ['saveCanvas'] },
+  ],
+  // these are variables, so they are shown without ()
+  variables: ['mouseX', 'mouseY', 'mouseIsPressed', 'frameCount'],
+
+  prompts: [
+    'Draw a face using only ellipse(), rect() and fill().',
+    'Make a circle that follows your mouse and changes colour when you click.',
+    'Paint with the mouse: leave a trail of shapes wherever you drag, and use random() to make each one a different size or colour.',
+  ],
+};
+
 const SNIPPETS = [
+  // -------------------------------------------------------------------
+  // SHAPES (beginner) — all numbers assume createCanvas(400, 400)
+  // -------------------------------------------------------------------
+  {
+    id: 'shape-circle',
+    title: 'Circle',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'A round shape. Hover over each number to see what it does.',
+    parts: [{ where: 'draw', code: `circle(200, 200, 100);` }],
+  },
+  {
+    id: 'shape-ellipse',
+    title: 'Ellipse (oval)',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'Like a circle, but you choose the width and height separately.',
+    parts: [{ where: 'draw', code: `ellipse(200, 200, 160, 80);` }],
+  },
+  {
+    id: 'shape-square',
+    title: 'Square',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'x and y are the top-left corner.',
+    parts: [{ where: 'draw', code: `square(150, 150, 100);` }],
+  },
+  {
+    id: 'shape-rect',
+    title: 'Rectangle',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'A box with its own width and height. x and y are the top-left corner.',
+    parts: [{ where: 'draw', code: `rect(100, 150, 200, 100);` }],
+  },
+  {
+    id: 'shape-rounded-rect',
+    title: 'Rounded rectangle',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'Add a fifth number to round the corners.',
+    parts: [{ where: 'draw', code: `rect(100, 150, 200, 100, 20);` }],
+  },
+  {
+    id: 'shape-line',
+    title: 'Line',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'From one point to another. Lines need a stroke colour to show up.',
+    parts: [{ where: 'draw', code: `stroke(255);
+strokeWeight(4);
+line(50, 50, 350, 350);` }],
+  },
+  {
+    id: 'shape-triangle',
+    title: 'Triangle',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'Three corners, each with an x and a y.',
+    parts: [{ where: 'draw', code: `triangle(200, 80, 80, 320, 320, 320);` }],
+  },
+  {
+    id: 'shape-quad',
+    title: 'Four-sided shape',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'Four corners, going round the shape in order.',
+    parts: [{ where: 'draw', code: `quad(100, 100, 300, 80, 320, 300, 80, 320);` }],
+  },
+  {
+    id: 'shape-point',
+    title: 'Point',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'A single dot. strokeWeight() sets how big it is.',
+    parts: [{ where: 'draw', code: `stroke(255);
+strokeWeight(10);
+point(200, 200);` }],
+  },
+  {
+    id: 'shape-arc',
+    title: 'Arc (part of a circle)',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'Like an ellipse, but only from a start angle to a stop angle. PI is half a turn.',
+    parts: [{ where: 'draw', code: `arc(200, 200, 200, 200, 0, PI);` }],
+  },
+  {
+    id: 'shape-text',
+    title: 'Text',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'Write words on the canvas.',
+    parts: [{ where: 'draw', code: `textSize(48);
+text('hello', 120, 200);` }],
+  },
+  {
+    id: 'shape-colour',
+    title: 'Colour and outline',
+    category: 'Shapes',
+    level: 'beginner',
+    description: 'Set these before a shape. They stay on for every shape after, until you change them.',
+    parts: [{ where: 'draw', code: `fill(255, 77, 109);   // inside colour
+stroke(255);          // outline colour
+strokeWeight(6);      // outline thickness
+circle(200, 200, 150);
+
+noStroke();           // no outline from here on
+fill(0, 200, 255, 120); // see-through blue
+circle(260, 200, 150);` }],
+    tip: 'One number is a grey (0 black, 255 white). Three numbers are red, green, blue. A fourth number makes it see-through.',
+  },
+
   // -------------------------------------------------------------------
   // CANVAS
   // -------------------------------------------------------------------
